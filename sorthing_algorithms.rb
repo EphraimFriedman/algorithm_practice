@@ -43,14 +43,37 @@ def insertion_sort(nums)
 end
 
 def merge_sort(nums)
+	return nums if nums.length <= 1
 
+	mid = nums.length / 2
+	left_array = nums[0...mid]
+	right_array = nums[mid..(nums.length - 1)]
+
+	stitch(merge_sort(left_array), merge_sort(right_array))
+end
+
+def stitch(left_array, right_array)
+	sorted_array = []
+
+	while right_array.length > 0 && left_array.length > 0
+			
+			if left_array[0] < right_array[0]
+				sorted_array << left_array.shift
+			else
+				sorted_array << right_array.shift
+			end
+	end
+
+	sorted_array + left_array + right_array
 end
 
 def quick_sort(nums)
 
 end
 
+# array = [1,2,3,4,5,6,7,8,9,0,10,200]
 
+# merge_sort(array)
 
 
 

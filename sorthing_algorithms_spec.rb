@@ -31,5 +31,12 @@ describe 'sorting algorithms' do
 		expect(insertion_sort(unsorted_nums_with_negative)).to eq sorted_nums_with_negative
 	end
 
+	it 'merge sort with positive numbers' do
+		expect(merge_sort(unsorted_nums)).to eq sorted_nums
+	end
+
+	it 'merge sort with negative numbers' do
+		expect(merge_sort(unsorted_nums_with_negative)).to eq sorted_nums_with_negative
+	end
 
 end
