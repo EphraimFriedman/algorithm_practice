@@ -68,12 +68,23 @@ def stitch(left_array, right_array)
 end
 
 def quick_sort(nums)
+	return nums if nums.length <= 1
 
+	pivot = nums.pop
+
+	lesser_array = []
+	greater_array = []
+	nums.each do |num|
+		if num < pivot
+			lesser_array << num
+		else
+			greater_array << num
+		end
+	end
+
+	quick_sort(lesser_array) + [pivot] + quick_sort(greater_array)
 end
 
-# array = [1,2,3,4,5,6,7,8,9,0,10,200]
-
-# merge_sort(array)
 
 
 
