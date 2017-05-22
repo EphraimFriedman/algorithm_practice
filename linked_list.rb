@@ -1,8 +1,18 @@
 require 'pry'
 
+class Node
+  attr_reader :value
+  attr_accessor :next
+  
+  def initialize(value)
+    @value = value
+    @next = nil
+  end
+  
+end
+
 class Linked_List
   attr_accessor :head, :tail, :size 
-
 
   def initialize
     @head
@@ -12,55 +22,46 @@ class Linked_List
   
   def push(v)
     node = Node.new(v)
-    if head.nil?
-     @head = node
-    end
-
-    if tail
-      tail.next = node
-    end
-    @size += 1
-
-    @tail = node
+ 
+    self.head = node if head.nil?
+    self.tail.next = node if tail
+    self.size += 1
+    self.tail = node
   end
   
   def pop
-    return false if head.nil?
+    return nil if head.nil?
 
-    previous = @head
+    current = head
 
-    while previous.next != @tail
-      previous = previous.next
+    while current.next != tail
+      current = current.next
     end 
 
-    deleted_value = @tail.value
-    @tail = previous
-    @tail.next = nil
-    @size -= 1
+    deleted_value = tail.value
+    self.tail = current
+    tail.next = nil
+    self.size -= 1
 
     deleted_value
   end
   
   def include?(v)
-    raise 'list is empty' if @head.nil?
+    return false if head.nil?
 
-    found = false
-    current_node = @head
+    current_node = head
 
     while current_node != nil
-      if current_node.value == v
-        found = true
-        break;
-      end
+      return true if current_node.value == v
       current_node = current_node.next
     end
 
-    found
+    false
   end
 
   def find(v)
-    raise 'list is empty' if @head.nil?
-    current_node = @head
+    return nil if head.nil?
+    current_node = head
     while current_node != nil
       return current_node.value if current_node.value == v
       current_node = current_node.next
@@ -68,31 +69,21 @@ class Linked_List
   end
 
   def unshift(v)
-    if @head.nil?
-      @head = Node.new(v)
-    end
-
     node = Node.new(v)
-    node.next = @head
-    @head = node
-    @size += 1
+    return self.head = node if head.nil?
+
+    node.next = head
+    self.head = node
+    self.size += 1
   end
 
   def shift
-    return 'list is empty' if @head.nil?
-    @head = @head.next
-    @size -= 1
+    return nil if @head.nil?
+    self.head = head.next
+    self.size -= 1
   end
 end
 
 
 
-class Node
-  attr_accessor :value, :next
-  
-  def initialize(value)
-    @value = value
-    @next = nil
-  end
-  
-end
+
