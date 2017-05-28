@@ -1,4 +1,5 @@
 require 'pry'
+require 'benchmark'
 
 def bubble_sort(nums)
 	loop do
@@ -85,6 +86,15 @@ def quick_sort(nums)
 	quick_sort(lesser_array) + [pivot] + quick_sort(greater_array)
 end
 
+array = (1..10000).map { rand(10000) }
+
+Benchmark.bm do |arr|
+arr.report('bubble_sort') {bubble_sort(array)} 
+arr.report("insertion_sort") { insertion_sort(array) }
+arr.report("selection_sort") { selection_sort(array) }
+arr.report("merge_sort") { merge_sort(array) }
+arr.report("quick_sort") { quick_sort(array) }
+end
 
 
 
