@@ -31,7 +31,18 @@ describe 'Binary Search Tree' do
 	end
 
 	context 'include? method - returns boolean if item is in tree' do
+		
+		it 'returns true if found' do 
+			tree.push(third_value)
+			tree.push(fourth_value)
+			expect(tree.include?(fourth_value)).to eq true
+		end
 
+		it 'returns false if not found' do
+			tree.push(third_value)
+			tree.push(fourth_value)
+			expect(tree.include?(first_value)).to eq false
+		end
 	end
 
 	context 'full? method - returns boolean if tree is full' do

@@ -24,4 +24,13 @@ class Binary_Search_Tree
  	end 
  	val
  end
+
+ def include?(val)
+ 	return true if val == value
+ 	if val < value
+ 		!left.nil? && left.include?(val)
+ 	else
+ 		!right.nil? && right.include?(val)
+ 	end
+ end
 end
