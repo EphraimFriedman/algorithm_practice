@@ -27,6 +27,51 @@ describe 'Binary Search Tree' do
 
 	context 'delete method - removes given item from tree' do	
 
+		it 'removes item without children' do
+			tree.push(first_value)
+			tree.push(third_value)
+			tree.push(fourth_value)
+			expect(tree.delete(fourth_value)).to eq fourth_value
+			expect(tree.include?(fourth_value)).to eq false
+		end
+
+		it 'removes item with left child' do
+			tree.push(first_value)
+			tree.push(third_value)
+			tree.push(fourth_value)
+			tree.push(18)	
+			tree.push(19)	
+			tree.push(17)		
+			expect(tree.delete(17)).to eq 17
+			expect(tree.include?(17)).to eq false
+		end
+
+		it ' removes item with right child' do
+			tree.push(first_value)
+			tree.push(third_value)
+			tree.push(fourth_value)	
+			expect(tree.delete(third_value)).to eq third_value
+			expect(tree.include?(third_value)).to eq false
+		end
+
+		it 'removes item with both children' do
+			tree.push(first_value)
+			tree.push(third_value)
+			tree.push(fourth_value)
+			tree.push(18)	
+			tree.push(19)	
+			tree.push(17)		
+			expect(tree.delete(18)).to eq 18
+			expect(tree.include?(18)).to eq false
+		end	
+
+		it 'removes root of tree' do
+			tree.push(first_value)
+			tree.push(third_value)
+			tree.push(fourth_value)	
+			expect(tree.delete(21)).to eq 21
+			expect(tree.include?(21)).to eq false
+		end
 	end
 
 	context 'include? method - returns boolean if item is in tree' do	

@@ -92,6 +92,33 @@ class Binary_Search_Tree
  	left.delete_min(self) if left
  end
 
+ def delete(val, parent = nil)
+	if val < value
+		return_value = left.delete(val, self) if left
+	elsif val > value
+		return_value = right.delete(val, self) if right
+	else
+		if left && right
+			min_value = right.find_min_value
+			return_value = self.value
+			self.value = min_value
+			right.delete(min_value, self)
+		elsif parent.left == self
+			return_value = self.value
+			parent.left = left ? left : right
+		elsif parent.right == self
+			return_value = self.value
+			parent.right = left ? left : right
+		end
+	end
+	return_value
+ end
+
+ def find_min_value
+ 	return value if left.nil?	
+ 	left.find_min_value
+ end
+
 end
 
 
